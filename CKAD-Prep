@@ -1,0 +1,70 @@
+CKAD Prep Links
+--------------
+
+1. https://github.com/bmuschko/ckad-prep
+
+2. https://bmuschko.com/blog/ckad-prep/
+
+3. https://github.com/dgkanatsios/CKAD-exercises/blob/master/g.state.md
+
+4. https://devblogs.microsoft.com/premier-developer/certified-kubernetes-application-developer-ckad-exam-tips/
+
+5. https://mingchaoliao.github.io/2020/04/26/ckad-exam-guide.html#avoid-ctrl-cctrl-v-from-the-documentation
+
+6. https://learn.acloud.guru/handson/befc5a89-3288-412a-b6ae-68925d5f967b
+
+7. https://www.bluematador.com/blog/safely-removing-pods-from-a-kubernetes-node#:~:text=First%2C%20confirm%20the%20name%20of,terminated%20without%20any%20special%20procedures.&text=Next%2C%20use%20the%20kubectl%20drain,user%20pods%20from%20the%20node.
+
+8. Concepts: https://superuser.openstack.org/articles/review-of-pod-to-pod-communications-in-kubernetes/
+
+9. https://conferences.oreilly.com/velocity/vl-eu/public/schedule/detail/79399.html
+
+10. https://marsforever.com/2020/01/22/CKA-with-Practice-Tests/
+
+
+User creation and ROle Bindings
+-----------------------------------
+https://www.adaltas.com/en/2019/08/07/users-rbac-kubernetes/
+
+
+Roles - Imperative Commands
+---------------------------
+kubectl create role <role-name> --resource=pods,services,persistentvolumeclaim --verb="*" --namespace=<namespace-name>  
+
+Note: "*" denotes all permissions
+
+Role Binding
+-------------
+kubectl create rolebinding <role binding name> --role=<role-name> --user=<user-name to bind>
+
+
+How to add user certificate and key
+---------------------------------
+kubectl config set-credentials <user> --client-certificate=<path> --client-key=<path>
+
+
+Create a New context in the default config file
+---------------------------------------------
+kubectl config set-context <context-name> --cluster=<cluster name> --user=<user name>
+
+
+Switch context
+-------------
+kubectl config use-context <context-name>
+
+
+To sort the output of kubectl top pod --all-namespaces, pipe it to sort:
+-----------------------------------------------------------------------
+kubectl top pod --all-namespaces | sort --reverse --key 3 --numeric | head -10
+
+Explanation:
+kubectl top pod --all-namespace Prints the top information of all pods in all namespaces. Other filters may also be applied.
+sort --reverse --key 3 --numeric Sorts the input according to the numeric values found in column 3 in descending order.
+head -10 Prints only the top 10 lines.
+
+
+Encode password using base64
+---------------------------
+To encode pwd: echo -e 'password' | base64
+to Decode pwd: echo 'encrypted password' | base64 -d
+Link - https://linuxhint.com/bash_base64_encode_decode/
